@@ -16,6 +16,7 @@ class CreateToursGalleriesTable extends Migration
         Schema::create('tours_galleries', function (Blueprint $table) {
             $table->id();
 
+            // relasi dengan table 'tours'
             $table->bigInteger('tours_id');
             $table->string('url');
 

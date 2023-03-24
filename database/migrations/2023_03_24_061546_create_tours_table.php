@@ -22,6 +22,7 @@ class CreateToursTable extends Migration
 
             $table->string('tags')->nullable();
 
+            // relasi dengan table 'categories'
             $table->bigInteger('categories_id');
 
             $table->softDeletes();
