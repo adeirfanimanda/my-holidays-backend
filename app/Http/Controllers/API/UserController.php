@@ -98,4 +98,11 @@ class UserController extends Controller
 
         return ResponseFormatter::success($user, 'Data profile user berhasil di update');
     }
+
+    public function logout(Request $request)
+    {
+        $token = $request->user()->currentAccessToken()->delete();
+
+        return ResponseFormatter::success($token, 'Token Revoked');
+    }
 }
