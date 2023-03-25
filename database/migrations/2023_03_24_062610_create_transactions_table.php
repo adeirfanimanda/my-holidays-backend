@@ -19,7 +19,7 @@ class CreateTransactionsTable extends Migration
             // relasi dengan table 'users'
             $table->bigInteger('users_id');
 
-            $table->date('choose_date')->nullable();
+            $table->date('choose_date')->nullable(false);
 
             $table->float('total_price')->default(0);
             $table->float('fee')->default(0);
