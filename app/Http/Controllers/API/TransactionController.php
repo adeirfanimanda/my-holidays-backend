@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
+use App\Models\TransactionItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,5 +44,35 @@ class TransactionController extends Controller
             $transaction->paginate($limit),
             'Data list transaksi berhasil diambil'
         );
+    }
+
+    public function booking(Request $request)
+    {
+        $request->validate([
+            'items' => 'required|array',
+            'items.*.id' => 'exists:tours,id',
+            'total_price' => 'required',
+            'fee' => 'required',
+            'status' => 'required|in:PENDING,SUCCESS,CANCELLED,ACTIVE'
+        ]);
+
+        $transaction = Transaction::create([
+            'users_id' => Auth::user()->id,
+            'choose_date' => $request->choose_date,
+            'total_price' => $request->total_price,
+            'fee' => $request->fee,
+            'status' => $request->status,
+        ]);
+
+        foreach ($request->items as $tours) {
+            TransactionItem::create([
+                'users_id' => Auth::user()->id,
+                'tours_id' => $tours['id'],
+                'transactions_id' => $tours['id'],
+                'quantity' => $tours['quantity']
+            ]);
+        }
+
+        return ResponseFormatter::success($transaction->load('items.tours'), 'Transaksi berhasil');
     }
 }
