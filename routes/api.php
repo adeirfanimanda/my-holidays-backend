@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ToursCategoryController;
 use App\Http\Controllers\API\ToursController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('tours', [ToursController::class, 'all']);
+Route::get('categories', [ToursCategoryController::class, 'all']);
