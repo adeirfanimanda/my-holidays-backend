@@ -29,6 +29,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('user', [UserController::class, 'updateProfile']);
     Route::post('logout', [UserController::class, 'logout']);
 
-    Route::get('transaction', [TransactionController::class, 'all']);
+    Route::get('transactions', [TransactionController::class, 'all']);
     Route::post('booking', [TransactionController::class, 'booking']);
 });
