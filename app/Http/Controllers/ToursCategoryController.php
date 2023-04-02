@@ -49,7 +49,11 @@ class ToursCategoryController extends Controller
      */
     public function store(ToursCategoryRequest $request)
     {
-        //
+        $data = $request->all();
+
+        ToursCategory::create($data);
+
+        return redirect()->route('dashboard.category.index')->with('success', 'Category berhasil ditambahkan');
     }
 
     /**
@@ -71,7 +75,9 @@ class ToursCategoryController extends Controller
      */
     public function edit(ToursCategory $category)
     {
-        //
+        return view ('pages.dashboard.category.edit', [
+            'item' => $category
+        ]);
     }
 
     /**
@@ -83,7 +89,11 @@ class ToursCategoryController extends Controller
      */
     public function update(ToursCategoryRequest $request, ToursCategory $category)
     {
-        //
+        $data = $request->all();
+
+        $category->update($data);
+
+        return redirect()->route('dashboard.category.index')->with('success', 'Category berhasil di update');
     }
 
     /**
