@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>My Holidays</title>
-        <link rel="icon" href="assets/images/logo.png" type="image/x-icon">
+        <link rel="icon" href="/assets/logo1.png" type="image/x-icon">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
