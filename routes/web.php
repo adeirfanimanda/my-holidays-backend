@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ToursController;
 use App\Http\Controllers\ToursCategoryController;
+use App\Http\Controllers\ToursGalleryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,11 +22,16 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
 
         Route::middleware(['admin'])->group(function () {
+            Route::resource('tours', ToursController::class);
             Route::resource('category', ToursCategoryController::class);
+            Route::resource('tours.gallery', ToursGalleryController::class)->shallow()->only([
+                'index', 'create', 'store', 'destroy'
+            ]);
         });
     });
 });
