@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ToursRequest;
 use App\Models\Tours;
 use App\Models\ToursCategory;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class ToursController extends Controller
@@ -54,8 +55,17 @@ class ToursController extends Controller
      */
     public function create()
     {
-        $categories = ToursCategory::all();
-        return view('pages.dashboard.tours.create', compact('categories'));
+        DB::beginTransaction();
+
+        try {
+            $categories = ToursCategory::all();
+            DB::commit();
+
+            return view('pages.dashboard.tours.create', compact('categories'));
+        } catch (\Throwable $exception) {
+            DB::rollback();
+            throw $exception;
+        }
     }
 
     /**
@@ -66,11 +76,20 @@ class ToursController extends Controller
      */
     public function store(ToursRequest $request)
     {
-        $data = $request->all();
+        DB::beginTransaction();
 
-        Tours::create($data);
+        try {
+            $data = $request->all();
 
-        return redirect()->route('dashboard.tours.index');
+            Tours::create($data);
+
+            DB::commit();
+
+            return redirect()->route('dashboard.tours.index')->with('success', 'Tour berhasil di tambahkan');
+        } catch (\Throwable $exception) {
+            DB::rollback();
+            throw $exception;
+        }
     }
 
     /**
@@ -108,11 +127,20 @@ class ToursController extends Controller
      */
     public function update(ToursRequest $request, Tours $tour)
     {
-        $data = $request->all();
+        DB::beginTransaction();
 
-        $tour->update($data);
+        try {
+            $data = $request->all();
 
-        return redirect()->route('dashboard.tours.index');
+            $tour->update($data);
+
+            DB::commit();
+
+            return redirect()->route('dashboard.tours.index')->with('success', 'Tour berhasil di update');
+        } catch (\Throwable $exception) {
+            DB::rollback();
+            throw $exception;
+        }
     }
 
     /**
@@ -123,8 +151,17 @@ class ToursController extends Controller
      */
     public function destroy(Tours $tour)
     {
-        $tour->delete();
+        DB::beginTransaction();
 
-        return redirect()->route('dashboard.tours.index');
+        try {
+            $tour->delete();
+        
+            DB::commit();
+
+            return redirect()->route('dashboard.tours.index');
+        } catch (\Throwable $exception) {
+            DB::rollback();
+            throw $exception;
+        }
     }
 }
