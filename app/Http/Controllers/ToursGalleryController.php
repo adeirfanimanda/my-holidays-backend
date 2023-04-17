@@ -14,10 +14,10 @@ class ToursGalleryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Tours $tours)
+    public function index(Tours $tour)
     {
         if (request()->ajax()) {
-            $query = ToursGallery::where('tours_id', $tours->id);
+            $query = ToursGallery::where('tours_id', $tour->id);
 
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
@@ -39,7 +39,7 @@ class ToursGalleryController extends Controller
                 ->make();
         }
 
-        return view('pages.dashboard.gallery.index', compact('tours'));
+        return view('pages.dashboard.gallery.index', compact('tour'));
     }
     
     /**
