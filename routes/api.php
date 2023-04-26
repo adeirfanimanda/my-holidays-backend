@@ -4,7 +4,6 @@ use App\Http\Controllers\API\ToursCategoryController;
 use App\Http\Controllers\API\ToursController;
 use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\API\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,12 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('tours', [ToursController::class, 'all']);
-Route::get('categories', [ToursCategoryController::class, 'all']);
-
-Route::post('register', [UserController::class, 'register']);
-Route::post('login', [UserController::class, 'login']);
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [UserController::class, 'fetch']);
     Route::post('user', [UserController::class, 'updateProfile']);
@@ -32,3 +25,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('transactions', [TransactionController::class, 'all']);
     Route::post('booking', [TransactionController::class, 'booking']);
 });
+
+Route::get('tours', [ToursController::class, 'all']);
+Route::get('categories', [ToursCategoryController::class, 'all']);
+
+Route::post('register', [UserController::class, 'register']);
+Route::post('login', [UserController::class, 'login']);
