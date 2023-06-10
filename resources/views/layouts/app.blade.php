@@ -26,7 +26,7 @@
                 padding-bottom: .5rem; 		/*pl-2*/
                 line-height: 1.25; 			/*leading-tight*/
                 border-width: 2px; 			/*border-2*/
-                border-radius: .25rem; 		
+                border-radius: .25rem;
                 border-color: #edf2f7; 		/*border-gray-200*/
                 background-color: #edf2f7; 	/*bg-gray-200*/
             }
@@ -70,7 +70,7 @@
             }
         </style>
 
-        @livewireStyles 
+        @livewireStyles
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>

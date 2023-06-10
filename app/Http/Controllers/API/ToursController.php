@@ -27,18 +27,18 @@ class ToursController extends Controller
             if($tours) {
                 return ResponseFormatter::success(
                     $tours,
-                    'Data tours berhasil diambil'
+                    'Data wisata berhasil diambil'
                 );
             } else {
                 return ResponseFormatter::error(
                     null,
-                    'Data tours tidak ada',
+                    'Data wisata tidak ada',
                     404
                 );
             }
         }
 
-        $tours = Tours::with(['category', 'galleries']);
+        $tours = Tours::with(['category','galleries']);
 
         if ($name) {
             $tours->where('name', 'like', '%' . $name . '%');
@@ -66,7 +66,7 @@ class ToursController extends Controller
 
         return ResponseFormatter::success(
             $tours->paginate($limit),
-            'Data tours berhasil diambil'
+            'Data wisata berhasil diambil'
         );
     }
 }

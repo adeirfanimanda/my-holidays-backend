@@ -70,7 +70,7 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Tour</th>
+                            <th>Tours</th>
                             <th>Price</th>
                             <th>Qty</th>
                         </tr>

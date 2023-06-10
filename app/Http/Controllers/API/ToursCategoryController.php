@@ -12,7 +12,7 @@ class ToursCategoryController extends Controller
     public function all(Request $request)
     {
         $id = $request->input('id');
-        $limit = $request->input('limit');
+        $limit = $request->input('limit', 6);
         $name = $request->input('name');
         $show_tours = $request->input('show_tours');
 
@@ -22,12 +22,12 @@ class ToursCategoryController extends Controller
             if($category) {
                 return ResponseFormatter::success(
                     $category,
-                    'Data kategoti berhasil diambil'
+                    'Data kategori berhasil diambil'
                 );
             } else {
                 return ResponseFormatter::error(
                     null,
-                    'Data kategoti tidak ada',
+                    'Data kategori tidak ada',
                     404
                 );
             }

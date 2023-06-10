@@ -11,14 +11,10 @@ class ToursGallery extends Model
 {
     use HasFactory, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
     protected $fillable = [
         'tours_id',
         'url',
+        'is_featured'
     ];
 
     public function getUrlAttribute($url)
